@@ -1,3 +1,5 @@
+"use strict";
+
 var AppView = (function(){
 
 	function create(){
@@ -6,7 +8,7 @@ var AppView = (function(){
 		appView.init();
 		return appView;
 	}
-	
+
 	function bind(appView){
 		appView.installServiceWorker = installServiceWorker.bind(appView);
 		appView.serviceWorkerInstalled = serviceWorkerInstalled.bind(appView);
@@ -15,7 +17,7 @@ var AppView = (function(){
 		appView.attachEvents = attachEvents.bind(appView);
 		appView.init = init.bind(appView);
 	}
-	
+
 	function installServiceWorker(){
 		if("serviceWorker" in navigator){
 			navigator.serviceWorker.register("service-worker.js", {scope: "./"})
@@ -31,20 +33,24 @@ var AppView = (function(){
 	function serviceWorkerInstallFailed(error){
 		console.error("App Service failed to install", error);
 	}
-	
+
 	function cacheDom(){
 		this.dom = {};
 	}
-	
+
 	function attachEvents(){
 	}
-	
+
+	function getQueryData(){
+		let searchParams = new URLSearchParams(window.location.search.substr(1));
+	}
+
 	function init(){
-		//this.installServiceWorker();
+		this.installServiceWorker();
 		this.cacheDom();
 		this.attachEvents();
 	}
-	
+
 	return {
 		create : create
 	};
