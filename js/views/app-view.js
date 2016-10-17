@@ -18,6 +18,7 @@ var AppView = (function(){
 		appView.init = init.bind(appView);
 
     appView.scan = scan.bind(appView);
+    appView.batteryLevelChanged = batteryLevelChanged.bind(appView);
 	}
 
 	function installServiceWorker(){
@@ -71,7 +72,7 @@ var AppView = (function(){
     })
     .then(x => {
       const value = x.getUint8(0);
-      this.dom.output.textContent = "Read Value:" + x + "\n";
+      this.dom.output.textContent = "Read Value:" + value + "\n";
     })
     .catch(x => this.dom.output.textContent = "Error: " + JSON.stringify(x) + "\n")
   }
