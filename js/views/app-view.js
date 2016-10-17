@@ -54,6 +54,7 @@ var AppView = (function(){
       }]
     })
     .then(device => {
+      device.addEventListener("gattserverdisconnected", this.disconnect);
       this.dom.output.textContent += device.name + "\n";
       return device.gatt.connect();
     })
@@ -67,7 +68,8 @@ var AppView = (function(){
     })
     .then(characteristic => {
       console.log("characteristic", characteristic);
-      characteristic.addEventListener("characteristicvaluechanged", this.batteryLevelChanged);
+      characteristic.startNotifications()
+        .then(characteristic => characteristic.addEventListener("characteristicvaluechanged", this.batteryLevelChanged));
       return characteristic.readValue();
     })
     .then(x => {
@@ -80,6 +82,11 @@ var AppView = (function(){
   function batteryLevelChanged(e){
     const value = e.target.value.getUint8(0);
     console.log(`Value changed to: ${value}%`);
+  }
+
+  function disconnect(e){
+    const device = e.target;
+    this.dom.output.textContent = `Device ${device.name} disconnected`;
   }
 
 	function getQueryData(){
