@@ -19,6 +19,7 @@ var AppView = (function(){
 
     appView.scan = scan.bind(appView);
     appView.batteryLevelChanged = batteryLevelChanged.bind(appView);
+    appView.disconnect = disconnect.bind(appView);
 	}
 
 	function installServiceWorker(){
