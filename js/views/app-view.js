@@ -64,7 +64,7 @@ var AppView = (function(){
       console.log("service", service);
       return service.getCharacteristic("battery_level");
     })
-    then(characteristic => {
+    .then(characteristic => {
       console.log("characteristic", characteristic);
       return characteristic.readValue();
     })
