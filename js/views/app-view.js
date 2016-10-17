@@ -66,10 +66,19 @@ var AppView = (function(){
     })
     .then(characteristic => {
       console.log("characteristic", characteristic);
+      characteristic.addEventListener("characteristicvaluechanged", this.batteryLevelChanged);
       return characteristic.readValue();
     })
-    .then(x => this.dom.output.textContent = "Read Value:" + x + "\n" )
+    .then(x => {
+      const value = x.getUint8(0);
+      this.dom.output.textContent = "Read Value:" + x + "\n";
+    })
     .catch(x => this.dom.output.textContent = "Error: " + JSON.stringify(x) + "\n")
+  }
+
+  function batteryLevelChanged(e){
+    const value = e.target.value.getUint8(0);
+    console.log(`Value changed to: ${value}%`);
   }
 
 	function getQueryData(){
