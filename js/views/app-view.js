@@ -52,10 +52,24 @@ var AppView = (function(){
         services : ["battery_service"]
       }]
     })
-    .then(x => {
-      this.dom.output.textContent += x.deviceName + "\n";
+    .then(device => {
+      this.dom.output.textContent += device.name + "\n";
+      return device.gatt.connect();
     })
-    .catch(x => this.dom.output.textContent = JSON.stringify(x))
+    .then(gatt => {
+      console.log("gatt", gatt);
+      return gatt.getPrimaryService("battery_service");
+    })
+    .then(service => {
+      console.log("service", service);
+      return service.getCharacteristic("battery_level");
+    })
+    then(characteristic => {
+      console.log("characteristic", characteristic);
+      return characteristic.readValue();
+    })
+    .then(x => this.dom.output.textContent = "Read Value:" + x + "\n" )
+    .catch(x => this.dom.output.textContent = "Error: " + JSON.stringify(x) + "\n")
   }
 
 	function getQueryData(){
