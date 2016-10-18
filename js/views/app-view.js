@@ -68,7 +68,7 @@ var AppView = (function() {
 			})
 			.then(gatt => {
 				console.log("gatt", gatt);
-				gatt.getPrimaryServices().then(x => console.log("services", x));
+				gatt.getPrimaryServices().then(x => console.log("services", x)).catch(x => console.log("Error in services", x));
 				return gatt.getPrimaryServices("battery_service");
 			})
 			.then(service => {
