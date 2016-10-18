@@ -68,13 +68,14 @@ var AppView = (function() {
 			})
 			.then(gatt => {
 				console.log("gatt", gatt);
-				return gatt.getPrimaryService("battery_service");
+				return gatt.getPrimaryServices();
 			})
-			.then(service => {
-				console.log("service", service);
-				return service.getCharacteristic("battery_level");
+			.then(services => {
+				//console.log("service", service);
+				this.output.textContent += JSON.stringify(services);
+				//return service.getCharacteristic("battery_level");
 			})
-			.then(characteristic => {
+			/*.then(characteristic => {
 				console.log("characteristic", characteristic);
 				characteristic.startNotifications()
 					.then(characteristic => characteristic.addEventListener("characteristicvaluechanged", this.batteryLevelChanged));
@@ -83,7 +84,7 @@ var AppView = (function() {
 			.then(x => {
 				const value = x.getUint8(0);
 				this.dom.output.textContent = "Read Value:" + value + "\n";
-			})
+			})*/
 			.catch(x => this.dom.output.textContent = "Error: " + JSON.stringify(x) + "\n")
 	}
 
