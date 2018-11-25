@@ -1,15 +1,22 @@
 <!doctype html>
 <html>
 	<head>
-		<title>Web Bluetooth Tester</title>
+		<title>Web Bluetooth App</title>
+		<link rel="manifest" href="manifest.json">
 		<link rel="stylesheet" href="css/index.css"></link>
+		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+		<link rel="icon" href="img/icon32x32.png" type="image/png" />
 	</head>
-	<body>
-    <button id="scan">Scan</button>
-    <div id="output" style="whitespace: pre"></div>
-		<script src="js/lib/utilities.js"></script>
-		<script src="js/views/app-view.js"></script>
-		<script src="js/index.js"></script>
+	<body lang="en">
+		<app-root>
+			<h1>Hello</h1>
+			<bt-battery></bt-battery>
+		</app-root>
+		<!--<service-worker url="service-worker.js" scope="./"></service-worker>-->
+		<script src="js/components/service-worker.js" type="module"></script>
+		<script src="js/components/bt-battery.js" type="module"></script>
+		<script src="js/components/app-root.js" type="module"></script>
+		
 	</body>
 </html>
