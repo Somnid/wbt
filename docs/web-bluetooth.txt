@@ -8,3 +8,7 @@ Characteristic.properties:
     writableAuxiliaries: false
     write: false
     writeWithoutResponse: false
+
+Permission Bits
+[1        , 2   , 4                   , 8    , 16    , 32      , 64                       , 128               ]
+[Broadcast, Read, WriteWithoutResponse, Write, Notify, Indicate, AuthenticatedSignedWrites, ExtendedProperties]

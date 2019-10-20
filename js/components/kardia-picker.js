@@ -1,3 +1,8 @@
+const bufferToHexString = buffer =>
+    Array.prototype.map.call(new Uint8Array(buffer), x => ('00' + x.toString(16)).slice(-2)).join('');
+
+const utf8encoder = new TextEncoder();
+
 customElements.define("kardia-picker",
     class extends HTMLElement {
         constructor() {
@@ -42,12 +47,24 @@ customElements.define("kardia-picker",
                     throw `${primaryService} Service not found`
                 }
 
-                const characteristic = await primaryService.getCharacteristic("ac060003-328c-a28f-9846-5a8aa212661b");
-                characteristic.addEventListener('characteristicvaluechanged', this.handleChange);
+                const ecgCharacteristic = await primaryService.getCharacteristic("ac060003-328c-a28f-9846-5a8aa212661b");
+                ecgCharacteristic.addEventListener('characteristicvaluechanged', this.handleChange);
+
+                const cmdCharacteristic = await primaryService.getCharacteristic("ac060002-328c-a28f-9846-5a8aa212661b");
+                cmdCharacteristic.writeValue(await unlockCode);
+
                 await characteristic.startNotifications();
             } catch(ex){
                 console.error(ex.message);
             }
+        }
+        async getUnlockCode(mode, deviceName){
+            const deviceString = utf8encoder.encode("Triangle" + deviceName);
+            const deviceHash = await crypto.subtle.digest("SHA-256", deviceString);
+            const deviceHashHex = bufferToHexString(deviceHash);
+            const truncatedDeviceHashHex = deviceHashHex.substring(0, Math.min(16, deviceHashHex.length));
+            const unlockCode = `${mode} K${truncatedDeviceHashHex}`;
+            return utf8encoder.encode(unlockCode);
         }
         onDisconnected(device){
             console.log(`${device.name} has disconnected`);

@@ -7,7 +7,20 @@ Kardia 6L:
     Sevices:
         Battery
         Device Information 
-        AC060001-328C-A28F-9846-5A8AA212661B
+        AC060001-328C-A28F-9846-5A8AA212661B (Service UUID)
             Characteristics: 
-                0xAC060002-328C-A28F-9846-5A8AA212661B (write)
-                0xAC060003-328C-A28F-9846-5A8AA212661B (notify)
+                0xAC060002-328C-A28F-9846-5A8AA212661B (Command Characteristic, write)
+                0xAC060003-328C-A28F-9846-5A8AA212661B (ECG Characteristic, notify)
+
+    Modes:
+        0: Unknown
+        1: Single lead 300HZ (M1)
+        2: Dual lead 300HZ (M2)
+        3: Single lead 600HZ (M3)
+        4: Dual lead 600HZ (M4)
+
+    Need to write characteristic 0xAC060002-328C-A28F-9846-5A8AA212661B with format (WRITE unlock code)
+    ```
+        const deviceHash = Sha256("Triangle" + deviceName) > toHexString //Encoding is utf-8
+        MODE_STRING + " K" + deviceHash.substr(0, Math.min(16, deviceHash.length))
+    ```
