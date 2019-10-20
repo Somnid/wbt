@@ -1,0 +1,13 @@
+Kardia 6L:
+    UUID: 489F3FC8-2620-0B5A-30DA-14019BBA4DA9
+    Manufacturer:
+        AliveCor
+    Model:
+        AC-019
+    Sevices:
+        Battery
+        Device Information 
+        AC060001-328C-A28F-9846-5A8AA212661B
+            Characteristics: 
+                0xAC060002-328C-A28F-9846-5A8AA212661B (write)
+                0xAC060003-328C-A28F-9846-5A8AA212661B (notify)

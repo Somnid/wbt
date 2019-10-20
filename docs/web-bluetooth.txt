@@ -1,0 +1,10 @@
+Characteristic.properties:
+    authenticatedSignedWrites: false
+    broadcast: false
+    indicate: false
+    notify: true
+    read: false
+    reliableWrite: false
+    writableAuxiliaries: false
+    write: false
+    writeWithoutResponse: false

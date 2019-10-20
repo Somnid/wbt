@@ -131,3 +131,8 @@ button.toggled:hover,
 	padding: 5px;
 	margin-bottom: 10px;
 }
+
+kardia-picker,
+bluetooth-picker {
+	display: block;	
+}

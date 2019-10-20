@@ -10,12 +10,15 @@
 	</head>
 	<body lang="en">
 		<app-root>
-			<h1>Hello</h1>
-			<bt-battery></bt-battery>
+			<h1>Select a Bluetooth LE Device with a Battery Service:</h1>
+			<bluetooth-picker services="battery_service" characteristics="battery_level"></bluetooth-picker>
+			<h1>Select a Kardia 6L</h1>
+			<kardia-picker></kardia-picker>
 		</app-root>
 		<!--<service-worker url="service-worker.js" scope="./"></service-worker>-->
 		<script src="js/components/service-worker.js" type="module"></script>
-		<script src="js/components/bt-battery.js" type="module"></script>
+		<script src="js/components/bluetooth-picker.js" type="module"></script>
+		<script src="js/components/kardia-picker.js" type="module"></script>
 		<script src="js/components/app-root.js" type="module"></script>
 		
 	</body>
